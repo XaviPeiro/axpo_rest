@@ -28,7 +28,7 @@ class VPICClientUnitTest(TestCase):
         vpi_client = VPICClient()
         response = vpi_client.get_models_for_brand(brand="volkswagen")
 
-        self.assertEqual(response.status_code, HTTP_200_OK)
+        self.assertIsInstance(response, dict)
 
     def test_does_brand_and_model_exists_WITH_NON_existing_SHOULD_return_false(self):
         with mock.patch("cars.services.vpic_client.VPICClient._request") as vpic_request:

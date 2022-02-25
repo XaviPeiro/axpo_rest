@@ -28,9 +28,9 @@ class VPICClient:
         if response.json()["Count"] == 0:
             raise NotFoundException
 
-        return response
+        return response.json()
 
-    def get_models_for_brand(self, brand: str):
+    def get_models_for_brand(self, brand: str) -> dict:
         endpoint = "vehicles/GetModelsForMake/"
         uri = f"{endpoint}/{brand}"
 

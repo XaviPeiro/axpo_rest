@@ -1,5 +1,5 @@
 from django.urls import reverse
-from rest_framework.status import HTTP_200_OK, HTTP_404_NOT_FOUND, HTTP_201_CREATED
+from rest_framework.status import HTTP_200_OK, HTTP_404_NOT_FOUND, HTTP_201_CREATED, HTTP_204_NO_CONTENT
 from rest_framework.test import APITestCase
 
 from cars.models import Car
@@ -39,4 +39,13 @@ class CarAcceptanceAPITest(APITestCase):
             }
         )
 
-        assert response.status_code is HTTP_201_CREATED
+        assert response.status_code == HTTP_201_CREATED
+
+    def test_car_delete_WITH_existing_brand_and_model_SHOULD_return_HTTP_201_CREATED(self):
+        new_car = Car(brand="Renault", model="Something")
+        new_car.save()
+
+        url = reverse('car-detail', kwargs={"pk": new_car.pk})
+        response = self.client.delete(path=url)
+
+        assert response.status_code is HTTP_204_NO_CONTENT
