@@ -17,6 +17,7 @@ from django.contrib import admin
 from django.urls import path, include
 
 from cars.router import router as car_router
+from rate.router import router as rate_router
 
 """
 POST /cars
@@ -32,5 +33,6 @@ GET /popular
 """
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/v1/', include(car_router.urls))
+    path('api/v1/', include(car_router.urls)),
+    path('api/v1/', include(rate_router.urls))
 ]
